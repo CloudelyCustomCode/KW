@@ -1,0 +1,16 @@
+<apex:page controller="CLDY_SubmitAgreementRequest" showHeader="false" sidebar="false" action="{!onload}">
+    <apex:form >
+        <apex:outputPanel rendered="{!requestSubmittedToQueue}">
+            <script type="text/javascript">
+                alert('your agreement has been submitted to the Queue.');
+                window.location.href = '/apex/RequestSubmitted?AgrId=' + '{!agreementRecordId}';
+            </script>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!!requestSubmittedToQueue}">
+            <script>
+                alert('your agreement unable to submitted to the Queue. Please contact Admin.');
+                window.location.href = '/apex/RequestSubmitted?AgrId=' + '{!agreementRecordId}';
+            </script>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

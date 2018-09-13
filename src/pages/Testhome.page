@@ -1,0 +1,63 @@
+<apex:page controller="Cldy_FAQ" sidebar="false"  lightningStylesheets="true" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.SLDSv0122, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />    
+<apex:stylesheet value="{!URLFOR($Resource.SLDS090, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+<script type='text/javascript'> 
+function switchMenu(obj,obj1,obj2) 
+        {
+            var el = document.getElementById(obj);                                       
+            if ( el.style.display != 'none' ) {
+            el.style.display = 'none';
+            }
+            else {
+            el.style.display = '';
+            }
+            var e2 = document.getElementById(obj1);                                       
+            if ( e2.style.display != 'none' ) {
+            e2.style.display = 'none';
+            }
+            else {
+            e2.style.display = '';
+            }
+             var e3 = document.getElementById(obj2);                                       
+            if ( e2.style.display != 'none' ) {
+            e3.style.display = 'none';
+            }
+            else {
+            e3.style.display = '';
+            }
+
+        }
+</script>
+<div class="slds">
+
+<apex:pageblock >
+<div class="slds-page-header"><b style="font-size:20px;">Frequently Asked Questions</b></div>
+    <table>
+    <apex:variable var="count" value="{!1}"   />
+        
+        <apex:repeat value="{!faqList}" var="fq">
+           
+           <tr>
+           <td  style="color:red;background-color:rgba(255,255,0,0.3);"><b>{!count}.&nbsp;{!fq.Question__c}</b></td>
+           </tr>
+           <tr>    
+
+            <td style="background-color:rgba(192,192,192,0.3);"> 
+                       <apex:outputpanel id="plusimage">
+                  <apex:image url="{!$Resource.Plus_Image}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.minusimage}','{!$Component.plusimage}')" title="Expand - Team Member's"/> 
+            </apex:outputpanel>
+            <apex:outputpanel id="minusimage" style="display:none;">
+                  <apex:image url="{!$Resource.Minus_image}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.plusimage}','{!$Component.minusimage}')" title="Collapse - Team Member's"/>
+            </apex:outputpanel>
+            <apex:outputpanel id="inlinetablesec" style="display:none;">
+            <apex:outputfield value="{!fq.Answer__c}" /><br/></apex:outputpanel>
+            </td>
+            </tr>
+          
+           <apex:variable var="count" value="{!count+1}"   />    
+             
+        </apex:repeat>
+    </table>
+</apex:pageblock>
+</div>
+</apex:page>

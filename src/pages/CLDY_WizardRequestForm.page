@@ -1,0 +1,5 @@
+<apex:page controller="CLDY_WizardRequestFormCntrl" action="{!redirectToWizard}">
+    <apex:form >
+        
+    </apex:form>
+</apex:page>

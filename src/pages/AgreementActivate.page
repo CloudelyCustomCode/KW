@@ -1,0 +1,11 @@
+<apex:page controller="CLDY_AgreementAutoActivate" action="{!onload}">
+    <apex:form >
+        <apex:pageBlock title="Activate Agreement">
+            <apex:pageMessages >
+            </apex:pageMessages>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Back To Agreement" action="{!goToAgreement}"></apex:commandButton>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

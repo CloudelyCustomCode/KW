@@ -1,0 +1,16 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<div class="slds-page-header">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__body">
+                        <span style="width:50%;float: left;">
+                            <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate headerh1" title="this should match the Record Title">Frequently Asked Questions</h1>
+                        </span>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

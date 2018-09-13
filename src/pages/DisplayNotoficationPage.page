@@ -1,0 +1,75 @@
+<apex:page controller="DisplayNotofication" id="pageid">
+    <apex:form id="frm">
+        <style>
+            .yellowColour {
+                background-color: yellow !Important;
+                cursor:pointer !Important;
+            }
+            .redColour {
+                background-color:lightsalmon !Important;
+                cursor:pointer !Important;
+            }
+            .greenColour{
+                background-color:#00ff00 !Important;
+                cursor:pointer !Important;
+            }
+            .dataRow {cursor:pointer !Important;}
+            .msgText {text-align:center !Important;} 
+        </style>
+        <script>
+            function handle(event){
+                var NoteId = event.target.querySelector('.rowId').dataset.rowId;
+                methodOneInJavascript(NoteId);
+                window.open('/'+NoteId);
+            }
+        </script>
+        <script>
+            var yellowRow = document.getElementsByClassName("yellowColour");
+            var redRow = document.getElementsByClassName("redColour");
+            var greenRow = document.getElementsByClassName("greenColour");
+                
+            for(var i=0;i<redRow.length;i++){
+                redRow[i].parentNode.className = "redColour";
+            }
+            for(var i=0;i<yellowRow.length;i++){
+                yellowRow[i].parentNode.className = "yellowColour";
+            } 
+            for(var i=0;i<yellowRow.length;i++){
+                greenRow[i].parentNode.className = "greenColour";
+            } 
+        </script>
+        <apex:actionFunction action="{!ChangeMessageStatus}" name="methodOneInJavascript" rerender="frm">
+            <apex:param name="NityId" assignTo="{!NotyId}" value="" />
+        </apex:actionFunction>
+        <div style="overflow:auto;height:160px;" layout="block">
+            <apex:pageBlock title="Notification Messages">
+                <apex:pageBlockTable value="{!lstNott}" var="NotyDetails" onRowClick="handle(event)" rendered="{!(lstNott.size != 0)}" style="width:100%">
+                    
+                    <apex:column headerValue="Related User" style="width:200px" styleClass="{!if(NotyDetails.Status__c =='Open','redColour',If(NotyDetails.Status__c =='Completed','greenColour !Important', 'yellowColour !Important'))}">
+                        <span class="rowId" data-row-id="{!NotyDetails.Id}" />
+                        <!--<apex:outputField value="{!NotyDetails.Related_User__c}"></apex:outputField>-->
+                        <apex:outputLink value="/{!NotyDetails.Related_User__c}" target="_blank">{!NotyDetails.Related_User__r.Name}</apex:outputLink>
+                    </apex:column>
+                        
+                    <apex:column headerValue="Status" style="width:200px" styleClass="{!if(NotyDetails.Status__c =='Open','redColour',If(NotyDetails.Status__c =='Completed','greenColour !Important', 'yellowColour !Important'))}">
+                        <span class="rowId" data-row-id="{!NotyDetails.Id}" />
+                        {!NotyDetails.Status__c}
+                    </apex:column>
+                        
+                    <apex:column headerValue="Message Type" style="width:200px" styleClass="{!if(NotyDetails.Status__c =='Open','redColour',If(NotyDetails.Status__c =='Completed','greenColour !Important', 'yellowColour !Important'))}">
+                        <span class="rowId" data-row-id="{!NotyDetails.Id}" />
+                        {!NotyDetails.Message_Type__c}
+                    </apex:column>
+                        
+                    <apex:column headerValue="Message" style="width:400px" styleClass="{!if(NotyDetails.Status__c =='Open','redColour',If(NotyDetails.Status__c =='Completed','greenColour !Important', 'yellowColour !Important'))}">
+                        <span class="rowId" data-row-id="{!NotyDetails.Id}" />
+                        {!NotyDetails.Message__c}
+                    </apex:column>
+                </apex:pageBlockTable>
+                <div class='msgText'>
+                    <apex:outputText rendered="{!(lstNott.size = 0)}" value="There are no Notification Messages to display." />
+                </div>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>
